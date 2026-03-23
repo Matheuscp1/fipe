@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: FIPE Async Integration API
+  version: v1
+  description: API interna alinhada aos parâmetros principais da FIPE v2.
+servers:
+  - url: http://localhost:8080
+security:
+  - basicAuth: []
+paths:
+  /api/v1/references:
+    get:
+      summary: Lista referências FIPE
+      responses:
+        '200':
+          description: Lista de referências
+  /api/v1/{vehicleType}/brands/initial-load:
+    post:
+      summary: Aciona carga inicial para um tipo de veículo
+      parameters:
+        - in: path
+          name: vehicleType
+          required: true
+          schema:
+            type: string
+            enum: [cars, motorcycles, trucks]
+        - in: query
+          name: reference
+          schema:
+            type: integer
+      responses:
+        '202':
+          description: Carga inicial enviada para a fila
+  /api/v1/{vehicleType}/brands:
+    get:
+      summary: Lista marcas persistidas
+      parameters:
+        - in: path
+          name: vehicleType
+          required: true
+          schema:
+            type: string
+            enum: [cars, motorcycles, trucks]
+        - in: query
+          name: reference
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de marcas
+  /api/v1/{vehicleType}/brands/{brandId}/models:
+    get:
+      summary: Lista modelos persistidos por marca
+      parameters:
+        - in: path
+          name: vehicleType
+          required: true
+          schema:
+            type: string
+            enum: [cars, motorcycles, trucks]
+        - in: path
+          name: brandId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: reference
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de modelos
+  /api/v1/{vehicleType}/brands/{brandId}/models/{modelId}:
+    put:
+      summary: Atualiza nome e observações do modelo salvo
+      parameters:
+        - in: path
+          name: vehicleType
+          required: true
+          schema:
+            type: string
+            enum: [cars, motorcycles, trucks]
+        - in: path
+          name: brandId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: modelId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: reference
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [modelName]
+              properties:
+                modelName:
+                  type: string
+                observations:
+                  type: string
+      responses:
+        '200':
+          description: Modelo atualizado
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

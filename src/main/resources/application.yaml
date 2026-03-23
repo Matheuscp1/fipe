@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: tabela-fipe
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/fipe
+    username: postgres
+    password: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fipe
+    username: postgres
+    password: postgres
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+application:
+  security:
+    username: admin
+    password: admin123
+  messaging:
+    initial-load-queue: fipe.initial-load.queue
+  cache:
+    brands-key-prefix: "fipe:brands"
+    vehicles-key-prefix: "fipe:vehicles:"
+  fipe-api:
+    base-url: https://fipe.parallelum.com.br/api/v2
+    default-vehicle-type: cars
+    default-reference: 278
+    subscription-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNTdiZDU4NS02YzFlLTQxOWQtYmJhMy0xZGY5NjM1N2FjODQiLCJlbWFpbCI6Im1hdGhldXNwcm9wcmVudG5lckBnbWFpbC5jb20iLCJpYXQiOjE3NzQyMjQ3NTZ9.thl5dxg3RmqoBF5QFeM8x_DFOwp5fQ1Ma7Niq-j6RLE
