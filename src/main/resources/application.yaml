@@ -1,26 +1,26 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:
     name: tabela-fipe
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/fipe
-    username: postgres
-    password: postgres
+    url: r2dbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:fipe}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
   datasource:
-    url: jdbc:postgresql://localhost:5432/fipe
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:fipe}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
   sql:
     init:
       mode: always
@@ -32,15 +32,15 @@ springdoc:
 
 application:
   security:
-    username: admin
-    password: admin123
+    username: ${APP_SECURITY_USERNAME:admin}
+    password: ${APP_SECURITY_PASSWORD:admin123}
   messaging:
-    initial-load-queue: fipe.initial-load.queue
+    initial-load-queue: ${APP_INITIAL_LOAD_QUEUE:fipe.initial-load.queue}
   cache:
-    brands-key-prefix: "fipe:brands"
-    vehicles-key-prefix: "fipe:vehicles:"
+    brands-key-prefix: ${APP_CACHE_BRANDS_KEY_PREFIX:fipe:brands}
+    vehicles-key-prefix: ${APP_CACHE_VEHICLES_KEY_PREFIX:fipe:vehicles:}
   fipe-api:
-    base-url: https://fipe.parallelum.com.br/api/v2
-    default-vehicle-type: cars
-    default-reference: 278
-    subscription-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNTdiZDU4NS02YzFlLTQxOWQtYmJhMy0xZGY5NjM1N2FjODQiLCJlbWFpbCI6Im1hdGhldXNwcm9wcmVudG5lckBnbWFpbC5jb20iLCJpYXQiOjE3NzQyMjQ3NTZ9.thl5dxg3RmqoBF5QFeM8x_DFOwp5fQ1Ma7Niq-j6RLE
+    base-url: ${FIPE_API_BASE_URL:https://fipe.parallelum.com.br/api/v2}
+    default-vehicle-type: ${FIPE_DEFAULT_VEHICLE_TYPE:cars}
+    default-reference: ${FIPE_DEFAULT_REFERENCE:278}
+    subscription-token: ${FIPE_SUBSCRIPTION_TOKEN:}

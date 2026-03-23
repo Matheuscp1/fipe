@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Mono<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException exception) {
         return Mono.just(Map.of("message", exception.getMessage()));
     }

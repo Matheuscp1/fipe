@@ -24,10 +24,6 @@ paths:
           schema:
             type: string
             enum: [cars, motorcycles, trucks]
-        - in: query
-          name: reference
-          schema:
-            type: integer
       responses:
         '202':
           description: Carga inicial enviada para a fila
@@ -41,10 +37,6 @@ paths:
           schema:
             type: string
             enum: [cars, motorcycles, trucks]
-        - in: query
-          name: reference
-          schema:
-            type: integer
       responses:
         '200':
           description: Lista de marcas
@@ -63,10 +55,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: reference
-          schema:
-            type: integer
       responses:
         '200':
           description: Lista de modelos
@@ -90,10 +78,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: reference
-          schema:
-            type: integer
       requestBody:
         required: true
         content:
